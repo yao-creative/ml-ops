@@ -1,0 +1,22 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ray-serve-linear-app
+    ports:
+      - "8000:8000"
+    environment:
+      SERVE_HOST: 0.0.0.0
+      SERVE_PORT: 8000
+      ARTIFACT_DIR: artifacts
+      TRAIN_RANDOM_SEED: 42
+      TRAIN_N_SAMPLES: 300
+      TRAIN_N_FEATURES: 3
+      TRAIN_NOISE: 0.2
+      MODEL_VERSION: v1
+    volumes:
+      - model_artifacts:/app/artifacts
+
+volumes:
+  model_artifacts:
